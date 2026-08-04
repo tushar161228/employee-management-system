@@ -7,12 +7,13 @@ import Performance from "./pages/Performance";
 import Compliance from "./pages/Compliance";
 import Recruitment from "./pages/Recruitment";
 import Settings from "./pages/Settings";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/leave" element={<Leave />} />
@@ -21,6 +22,7 @@ function App() {
         <Route path="/compliance" element={<Compliance />} />
         <Route path="/recruitment" element={<Recruitment />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
