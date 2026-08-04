@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/image.png";
 import {
   Home,
@@ -22,7 +23,9 @@ const navItems = [
   { label: "Settings", icon: SettingsIcon, path: "/settings" },
 ];
 
-export default function Sidebar({ activePath = "/dashboard" }) {
+export default function Sidebar() {
+  const location = useLocation();
+
   return (
     <div
       style={{
@@ -53,13 +56,13 @@ export default function Sidebar({ activePath = "/dashboard" }) {
         </span>
       </div>
 
-      {/* Nav Items */}
       <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         {navItems.map(({ label, icon: Icon, path }) => {
-          const isActive = path === activePath;
+          const isActive = path === location.pathname;
           return (
-            <div
+            <Link
               key={path}
+              to={path}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -67,6 +70,7 @@ export default function Sidebar({ activePath = "/dashboard" }) {
                 padding: "10px 12px",
                 borderRadius: "8px",
                 cursor: "pointer",
+                textDecoration: "none",
                 backgroundColor: isActive ? "#2563EB" : "transparent",
                 color: isActive ? "#FFFFFF" : "#374151",
                 fontWeight: isActive ? 600 : 500,
@@ -75,7 +79,7 @@ export default function Sidebar({ activePath = "/dashboard" }) {
             >
               <Icon size={18} />
               {label}
-            </div>
+            </Link>
           );
         })}
       </nav>
