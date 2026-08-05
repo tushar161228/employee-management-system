@@ -1,4 +1,15 @@
+import AppLayout from "../components/layout/AppLayout";
+import EmployeeTable from "../components/employees/EmployeeTable";
+import { useUser } from "../context/UserContext";
+
 function Employees() {
-  return <div style={{ padding: "24px" }}>Employees Page</div>;
+  const { user } = useUser();
+
+  return (
+    <AppLayout pageTitle="Employee Profiles" user={user}>
+      <EmployeeTable />
+    </AppLayout>
+  );
 }
+
 export default Employees;

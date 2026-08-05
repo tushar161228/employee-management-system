@@ -1,4 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { UserProvider } from "./context/UserContext";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Leave from "./pages/Leave";
@@ -7,24 +12,84 @@ import Performance from "./pages/Performance";
 import Compliance from "./pages/Compliance";
 import Recruitment from "./pages/Recruitment";
 import Settings from "./pages/Settings";
-import Login from "./pages/Login";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/employees" element={<Employees />} />
-        <Route path="/leave" element={<Leave />} />
-        <Route path="/payroll" element={<Payroll />} />
-        <Route path="/performance" element={<Performance />} />
-        <Route path="/compliance" element={<Compliance />} />
-        <Route path="/recruitment" element={<Recruitment />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <UserProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/employees"
+              element={
+                <ProtectedRoute>
+                  <Employees />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/leave"
+              element={
+                <ProtectedRoute>
+                  <Leave />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payroll"
+              element={
+                <ProtectedRoute>
+                  <Payroll />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/performance"
+              element={
+                <ProtectedRoute>
+                  <Performance />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/compliance"
+              element={
+                <ProtectedRoute>
+                  <Compliance />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/recruitment"
+              element={
+                <ProtectedRoute>
+                  <Recruitment />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </UserProvider>
+    </AuthProvider>
   );
 }
 

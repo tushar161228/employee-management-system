@@ -1,13 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/auth/LoginForm";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = (credentials) => {
     console.log("Login attempt:", credentials);
-    // later: call real auth API here
+    login(); // marks user as authenticated
     navigate("/dashboard");
   };
 

@@ -1,11 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../common/Avatar";
 import { User, Settings, LogOut, ChevronDown } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 
-export default function Navbar({ pageTitle = "Dashboard", user, onLogout }) {
+export default function Navbar({ pageTitle = "Dashboard", user }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -30,7 +38,14 @@ export default function Navbar({ pageTitle = "Dashboard", user, onLogout }) {
         position: "relative",
       }}
     >
-      <h2 style={{ margin: 0, fontSize: "20px", fontWeight: 700, color: "#111827" }}>
+      <h2
+        style={{
+          margin: 0,
+          fontSize: "20px",
+          fontWeight: 700,
+          color: "#111827",
+        }}
+      >
         {pageTitle}
       </h2>
 
@@ -38,11 +53,19 @@ export default function Navbar({ pageTitle = "Dashboard", user, onLogout }) {
         {/* Clickable profile trigger */}
         <div
           onClick={() => setOpen(!open)}
-          style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            cursor: "pointer",
+          }}
         >
           <Avatar src={user?.photoUrl} name={user?.name} size="md" />
           <span style={{ fontSize: "14px", color: "#111827" }}>
-            {user?.name} {user?.role && <span style={{ color: "#6B7280" }}>({user.role})</span>}
+            {user?.name}{" "}
+            {user?.role && (
+              <span style={{ color: "#6B7280" }}>({user.role})</span>
+            )}
           </span>
           <ChevronDown size={16} color="#6B7280" />
         </div>
@@ -70,8 +93,15 @@ export default function Navbar({ pageTitle = "Dashboard", user, onLogout }) {
               <Settings size={16} /> Settings
             </Link>
             <button
-              onClick={onLogout}
-              style={{ ...menuItemStyle, border: "none", background: "none", width: "100%", cursor: "pointer", color: "#DC2626" }}
+              onClick={handleLogout}
+              style={{
+                ...menuItemStyle,
+                border: "none",
+                background: "none",
+                width: "100%",
+                cursor: "pointer",
+                color: "#DC2626",
+              }}
             >
               <LogOut size={16} /> Logout
             </button>
