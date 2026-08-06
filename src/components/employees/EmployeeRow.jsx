@@ -5,7 +5,12 @@ import ActionButtons from "./ActionButtons";
 
 const cellStyle = { padding: "12px 8px", fontSize: "14px", color: "#374151" };
 
-export default function EmployeeRow({ employee }) {
+export default function EmployeeRow({
+  employee,
+  onEdit,
+  onView,
+  onDeactivate,
+}) {
   return (
     <tr style={{ borderBottom: "1px solid #F3F4F6" }}>
       <td style={cellStyle}>
@@ -23,9 +28,9 @@ export default function EmployeeRow({ employee }) {
       </td>
       <td style={cellStyle}>
         <ActionButtons
-          onEdit={() => alert(`Edit ${employee.name}`)}
-          onView={() => alert(`View ${employee.name}`)}
-          onDeactivate={() => alert(`Deactivate ${employee.name}`)}
+          onEdit={onEdit}
+          onView={onView}
+          onDeactivate={onDeactivate}
         />
       </td>
     </tr>

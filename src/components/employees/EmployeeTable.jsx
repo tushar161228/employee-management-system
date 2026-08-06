@@ -3,6 +3,7 @@ import Card from "../common/Card";
 import EmployeeRow from "./EmployeeRow";
 import SearchBar from "./SearchBar";
 import AddEmployeeButton from "./AddEmployeeButton";
+import AddEmployeeModal from "./AddEmployeeModal";
 import { employees } from "../../services/mockData";
 
 const headers = [
@@ -19,10 +20,28 @@ const headers = [
 export default function EmployeeTable() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
+  const [modalMode, setModalMode] = useState(null); // "add" | "edit" | "view" | null
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
-    setData(employees); // later: replace with real API call
+    setData(employees);
   }, []);
+
+  const handleSave = (employee) => {
+    if (modalMode === "edit") {
+      setData((prev) => prev.map((e) => (e.id === employee.id ? employee : e)));
+    } else {
+      setData((prev) => [...prev, employee]);
+    }
+  };
+
+  const handleDeactivate = (employee) => {
+    setData((prev) =>
+      prev.map((e) =>
+        e.id === employee.id ? { ...e, status: "On Leave" } : e,
+      ),
+    );
+  };
 
   const filteredData = data.filter(
     (emp) =>
@@ -53,7 +72,10 @@ export default function EmployeeTable() {
         <div style={{ display: "flex", gap: "12px" }}>
           <SearchBar value={search} onChange={setSearch} />
           <AddEmployeeButton
-            onClick={() => alert("Add New Employee clicked")}
+            onClick={() => {
+              setSelectedEmployee(null);
+              setModalMode("add");
+            }}
           />
         </div>
       </div>
@@ -84,11 +106,32 @@ export default function EmployeeTable() {
           </thead>
           <tbody>
             {filteredData.map((emp, i) => (
-              <EmployeeRow key={`${emp.id}-${i}`} employee={emp} />
+              <EmployeeRow
+                key={`${emp.id}-${i}`}
+                employee={emp}
+                onEdit={() => {
+                  setSelectedEmployee(emp);
+                  setModalMode("edit");
+                }}
+                onView={() => {
+                  setSelectedEmployee(emp);
+                  setModalMode("view");
+                }}
+                onDeactivate={() => handleDeactivate(emp)}
+              />
             ))}
           </tbody>
         </table>
       </Card>
+
+      {modalMode && (
+        <AddEmployeeModal
+          onClose={() => setModalMode(null)}
+          onSave={handleSave}
+          initialData={selectedEmployee}
+          readOnly={modalMode === "view"}
+        />
+      )}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Mail, Lock, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/image.png";
+import { MicrosoftIcon, GoogleIcon } from "../common/BrandIcons";
 
 export default function LoginForm({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -23,42 +25,21 @@ export default function LoginForm({ onLogin }) {
         textAlign: "center",
       }}
     >
-      {/* Logo */}
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
-          gap: "10px",
-          marginBottom: "24px",
+          marginBottom: "20px",
         }}
       >
         <img
           src={logo}
           alt="Sutra Sync Technologies"
-          style={{ width: "48px", height: "48px" }}
+          style={{ width: "56px", height: "56px", marginBottom: "8px" }}
         />
-        <div style={{ textAlign: "left" }}>
-          <div
-            style={{
-              fontWeight: 700,
-              fontSize: "18px",
-              color: "#111827",
-              lineHeight: 1.1,
-            }}
-          >
-            Sutra Sync
-          </div>
-          <div
-            style={{
-              fontWeight: 700,
-              fontSize: "18px",
-              color: "#111827",
-              lineHeight: 1.1,
-            }}
-          >
-            Technologies
-          </div>
+        <div style={{ fontWeight: 700, fontSize: "20px", color: "#111827" }}>
+          Sutra Sync Technologies
         </div>
       </div>
 
@@ -74,7 +55,6 @@ export default function LoginForm({ onLogin }) {
       </h2>
 
       <form onSubmit={handleSubmit}>
-        {/* Email */}
         <div style={inputWrapperStyle}>
           <Mail size={18} color="#6B7280" />
           <input
@@ -87,7 +67,6 @@ export default function LoginForm({ onLogin }) {
           />
         </div>
 
-        {/* Password */}
         <div style={{ ...inputWrapperStyle, marginTop: "12px" }}>
           <Lock size={18} color="#6B7280" />
           <input
@@ -100,10 +79,9 @@ export default function LoginForm({ onLogin }) {
           />
         </div>
 
-        {/* Forgot password */}
         <div style={{ textAlign: "right", marginTop: "8px" }}>
-          <a
-            href="#"
+          <Link
+            to="/forgot-password"
             style={{
               fontSize: "13px",
               color: "#1E3A8A",
@@ -111,33 +89,13 @@ export default function LoginForm({ onLogin }) {
             }}
           >
             Forgot Password?
-          </a>
+          </Link>
         </div>
 
-        {/* Sign In button */}
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            marginTop: "16px",
-            backgroundColor: "#1E3A8A",
-            color: "#FFFFFF",
-            border: "none",
-            borderRadius: "8px",
-            padding: "12px",
-            fontSize: "15px",
-            fontWeight: 600,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "8px",
-          }}
-        >
+        <button type="submit" style={signInButtonStyle}>
           Sign In <ArrowRight size={16} />
         </button>
 
-        {/* Remember me */}
         <label
           style={{
             display: "flex",
@@ -157,7 +115,6 @@ export default function LoginForm({ onLogin }) {
         </label>
       </form>
 
-      {/* Divider */}
       <div
         style={{
           display: "flex",
@@ -173,21 +130,23 @@ export default function LoginForm({ onLogin }) {
         <div style={{ flex: 1, height: "1px", backgroundColor: "#E5E7EB" }} />
       </div>
 
-      {/* Social buttons */}
       <div style={{ display: "flex", gap: "12px" }}>
-        <button style={socialButtonStyle}>Microsoft</button>
-        <button style={socialButtonStyle}>Google</button>
+        <button type="button" style={socialButtonStyle}>
+          <MicrosoftIcon /> Microsoft
+        </button>
+        <button type="button" style={socialButtonStyle}>
+          <GoogleIcon /> Google
+        </button>
       </div>
 
-      {/* Contact HR */}
       <p style={{ marginTop: "20px", fontSize: "13px", color: "#374151" }}>
         Don't have an account?{" "}
-        <a
-          href="#"
+        <Link
+          to="/signup"
           style={{ color: "#1E3A8A", fontWeight: 600, textDecoration: "none" }}
         >
-          Contact HR.
-        </a>
+          Sign Up
+        </Link>
       </p>
     </div>
   );
@@ -201,14 +160,28 @@ const inputWrapperStyle = {
   borderRadius: "8px",
   padding: "12px",
 };
-
 const inputStyle = {
   border: "none",
   outline: "none",
   fontSize: "14px",
   width: "100%",
 };
-
+const signInButtonStyle = {
+  width: "100%",
+  marginTop: "16px",
+  backgroundColor: "#1E3A8A",
+  color: "#FFFFFF",
+  border: "none",
+  borderRadius: "8px",
+  padding: "12px",
+  fontSize: "15px",
+  fontWeight: 600,
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px",
+};
 const socialButtonStyle = {
   flex: 1,
   display: "flex",

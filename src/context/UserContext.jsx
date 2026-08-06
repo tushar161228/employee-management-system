@@ -4,11 +4,10 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState({
-    name: "Shiv Kumar",
-    role: "Co-Founder",
+    name: "Guest",
+    role: "",
     photoUrl: "",
   });
-
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

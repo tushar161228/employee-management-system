@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { UserProvider } from "./context/UserContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-
+import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
@@ -12,6 +12,7 @@ import Performance from "./pages/Performance";
 import Compliance from "./pages/Compliance";
 import Recruitment from "./pages/Recruitment";
 import Settings from "./pages/Settings";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
-
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route
               path="/dashboard"
               element={
