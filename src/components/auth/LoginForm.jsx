@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { Mail, Lock, ArrowRight } from "lucide-react";
+import { Mail, Lock, User, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/image.png";
 import { MicrosoftIcon, GoogleIcon } from "../common/BrandIcons";
 
 export default function LoginForm({ onLogin }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin?.({ email, password, remember });
+    onLogin?.({ name, email, password, remember });
   };
 
   return (
@@ -56,6 +57,18 @@ export default function LoginForm({ onLogin }) {
 
       <form onSubmit={handleSubmit}>
         <div style={inputWrapperStyle}>
+          <User size={18} color="#6B7280" />
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            style={inputStyle}
+          />
+        </div>
+
+        <div style={{ ...inputWrapperStyle, marginTop: "12px" }}>
           <Mail size={18} color="#6B7280" />
           <input
             type="email"

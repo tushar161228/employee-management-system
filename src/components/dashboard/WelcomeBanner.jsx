@@ -1,23 +1,7 @@
 import React from "react";
 import Avatar from "../common/Avatar";
-function getShortDate() {
-  const today = new Date();
-  return today.toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "short",
-    day: "numeric",
-  });
-}
+import { getShortDate, getFullDate } from "../../utils/formatDate";
 
-function getFullDate() {
-  const today = new Date();
-  return today.toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
 
 export default function WelcomeBanner({ user }) {
   const shortDate = getShortDate();

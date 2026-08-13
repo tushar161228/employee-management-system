@@ -9,19 +9,12 @@ export default function Login() {
   const { login } = useAuth();
   const { setUser } = useUser();
 
-  const handleLogin = ({ email }) => {
-    // Derive a display name from the email (before the @)
-    const namePart = email.split("@")[0];
-    const displayName = namePart
-      .replace(/[._]/g, " ")
-      .replace(/\b\w/g, (c) => c.toUpperCase());
-
-    setUser({
-      name: displayName,
-      role: "Employee",
+  const handleLogin = ({ name }) => {
+    setUser((prev) => ({
+      ...prev,
+      name,
       photoUrl: "",
-    });
-
+    }));
     login();
     navigate("/dashboard");
   };

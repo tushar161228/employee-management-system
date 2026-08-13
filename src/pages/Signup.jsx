@@ -9,17 +9,14 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("Employee");
   const navigate = useNavigate();
   const { login } = useAuth();
   const { setUser } = useUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUser({
-      name,
-      role: "Employee",
-      photoUrl: "",
-    });
+    setUser({ name, role, photoUrl: "" });
     login();
     navigate("/dashboard");
   };
@@ -106,6 +103,20 @@ export default function Signup() {
               required
               style={inputStyle}
             />
+          </div>
+
+          {/* Role selection */}
+          <div style={{ ...inputWrapperStyle, marginTop: "12px" }}>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              style={{ ...inputStyle, cursor: "pointer" }}
+            >
+              <option value="Admin">Admin</option>
+              <option value="HR Director">HR Director</option>
+              <option value="Co-Founder">Co-Founder</option>
+              <option value="Employee">Employee</option>
+            </select>
           </div>
 
           <button

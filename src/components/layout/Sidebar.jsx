@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/image.png";
+import { NAV_ITEMS } from "../../constants/navigation";
 import {
   Home,
   Users,
@@ -57,7 +58,7 @@ export default function Sidebar() {
       </div>
 
       <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-        {navItems.map(({ label, icon: Icon, path }) => {
+        {NAV_ITEMS.map(({ label, icon: Icon, path }) => {
           const isActive = path === location.pathname;
           return (
             <Link
