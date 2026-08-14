@@ -20,6 +20,7 @@ export default function Login() {
   };
 
   return (
+
     <div
       style={{
         minHeight: "100vh",
@@ -31,5 +32,6 @@ export default function Login() {
     >
       <LoginForm onLogin={handleLogin} />
     </div>
+    
   );
 }
