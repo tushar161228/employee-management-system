@@ -157,3 +157,73 @@ export const recruitmentPipeline = [
     appliedOn: "2026-08-05",
   },
 ];
+
+export const leaveBalance = {
+  casual: { used: 3, total: 14 },
+  sick: { used: 1, total: 7 },
+  earned: { used: 6, total: 21 },
+};
+
+export const leaveRequests = [
+  {
+    id: "L001",
+    employeeName: "Rohan Sharma",
+    department: "Engineering",
+    type: "Casual Leave",
+    from: "Oct 28",
+    to: "Oct 31",
+    days: 4,
+    reason: "Family Event",
+    status: "Pending",
+    photoUrl: "",
+  },
+  {
+    id: "L002",
+    employeeName: "Priya Nair",
+    department: "HR",
+    type: "Sick Leave",
+    from: "Nov 2",
+    to: "Nov 3",
+    days: 2,
+    reason: "Medical",
+    status: "Pending",
+    photoUrl: "",
+  },
+  {
+    id: "L003",
+    employeeName: "Arjun Verma",
+    department: "Sales",
+    type: "Earned Leave",
+    from: "Nov 10",
+    to: "Nov 15",
+    days: 5,
+    reason: "Vacation",
+    status: "Pending",
+    photoUrl: "",
+  },
+  {
+    id: "L004",
+    employeeName: "Ananya Iyer",
+    department: "Marketing",
+    type: "Casual Leave",
+    from: "Nov 4",
+    to: "Nov 4",
+    days: 1,
+    reason: "Personal",
+    status: "Pending",
+    photoUrl: "",
+  },
+];
+
+export const announcements = [
+  {
+    id: "A001",
+    title: "Open Enrollment for Benefits Ends Nov 15th!",
+    body: "Review your plan options and make changes through the Employee Portal.",
+  },
+  {
+    id: "A002",
+    title: "New Compliance Training Module Available.",
+    body: "All managers must complete the 'Data Privacy' module by Dec 1st.",
+  },
+];
